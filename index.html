@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game of Life</title>
+
+    <link rel="stylesheet" href="normalizer.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="control-panel">
+        <div>
+            <label>show grid
+                <input type="checkbox" id="grid"></input>
+            </label>
+            <label>show index
+                <input type="checkbox" id="index"></input>
+            </label>
+        </div>
+
+        <label for="tiles">size</label>
+        <input id="tiles" name="tiles" type="number" min="10" max="100" value="10"></input>
+
+        <button id="newRandGen">new generation</button>
+
+        <div class="play-container">
+            <button id="start">start</button>
+            <button id="stop">stop</button>
+        </div>
+        <p id="gen-counter">hola</p>
+    </div>
+
+    <canvas id="canvas" height="401px" width="401px"></canvas>
+</body>
+
+<script src="logic.js"></script>
+
+</html>
