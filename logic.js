@@ -8,6 +8,7 @@ const showGrid = document.getElementById('grid'),
     print = canvas.getContext('2d');
 
 let TILES = document.getElementById('tiles').valueAsNumber;
+// let SPEED = document.getElementById('speed').valueAsNumber;
 
 let ARRAY = [];
 
@@ -106,7 +107,7 @@ const printGeneration = (generation) => {
         const X = i % TILES,
             Y = Math.floor(i / TILES);
 
-        print.fillStyle = cell ? '#78d399' : '#fff'
+        print.fillStyle = cell ? '#f0f0f0' : '#101010'
         print.fillRect(X * size, Y * size, size, size)
 
         // print index
@@ -127,35 +128,42 @@ const itsAlive = (firstGen) => {
     let oldGen = firstGen,
         oldGenPop = 0,
         newGen = [],
-        gen = 0,
+        gen = 1,
         bigger = {
-            population: 0,
+            population: firstGen.filter(e => e).length,
             gen: 0
         };
 
+    let SPEED = document.getElementById('speed').valueAsNumber;
+
     interval = setInterval(() => {
         // stats
-        let population = 0
+        let population = 0,
+            start = 0;
 
         // iterar generación
         oldGen.forEach((cell, i, arr) => {
+            // start timer
+            if (i === 0) start = Date.now()
+
             // saber canditad de vecinos
             const N = neighbours(i, arr),
                 alive = Boolean(cell);
 
             // aplicar reglas y guardar nuevo estado
             if (alive) {
-                population += 1
                 if (N < 2) { //! poca población
                     newGen.push(0)
                 } else if (N > 1 && N < 4) { //_ estable
                     newGen.push(1)
+                    population += 1
                 } else if (N > 3) { //! sobrepoblación                
                     newGen.push(0)
                 }
 
             } else if (N === 3) { //* reproducción                
                 newGen.push(1)
+                population += 1
 
             } else { // muerta sin cambio
                 newGen.push(0)
@@ -175,8 +183,8 @@ const itsAlive = (firstGen) => {
                 bigger.gen = gen
             }
 
-            // mostrar generación
-            genCounter.innerText = `Generación Nº${gen} (pop.: ${population})`
+            // mostrar info de la generación
+            genCounter.innerText = `Generación Nº${gen} (pob.: ${population}) | ${Date.now() - start}ms`
 
             gen += 1
             oldGenPop = population
@@ -186,11 +194,12 @@ const itsAlive = (firstGen) => {
             printGeneration(oldGen)
             stop()
             genCounter.innerText = `Generación final Nº ${gen - 1}, Población: ${oldGenPop}.
-            Mayor población: ${bigger.population} (gen. Nº ${bigger.gen})`
+            Mayor población: ${bigger.population} (gen. Nº ${bigger.gen}) | ${Date.now() - start}ms`
+
             population = 0
         }
 
-    }, 1000);
+    }, SPEED);
 
 }
 
@@ -199,6 +208,9 @@ const newRandom = () => {
     ARRAY = randomizeArray()
     printGeneration(ARRAY)
     showGrid.checked && printGrid()
+
+    // mostrar info de la generación
+    genCounter.innerText = `Generación Nº0 (pob.: ${ARRAY.filter(e => e).length})`
 }
 
 newRandom()

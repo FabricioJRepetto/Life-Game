@@ -1,12 +1,14 @@
 body {
     height: 100vh;
     display: flex;
+
+    background-color: #101010;
+    color: #f0f0f0;
 }
 
 canvas {
     /* border: 1px black solid; */
     margin: auto;
-    color: #ff450040;
 }
 
 button {
