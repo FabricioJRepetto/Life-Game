@@ -1,5 +1,5 @@
-const showGrid = document.getElementById('grid'),
-    showIndex = document.getElementById('index'),
+const showGrid = document.getElementById('grid') || false,
+    showIndex = document.getElementById('index') || false,
     newGenBtn = document.getElementById('newRandGen'),
     startBtn = document.getElementById('start'),
     stopBtn = document.getElementById('stop'),
@@ -8,7 +8,6 @@ const showGrid = document.getElementById('grid'),
     print = canvas.getContext('2d');
 
 let TILES = document.getElementById('tiles').valueAsNumber;
-// let SPEED = document.getElementById('speed').valueAsNumber;
 
 let ARRAY = [];
 
@@ -17,24 +16,6 @@ const randomizeArray = () => {
     const arr = Array.from({ length: res }, () => Math.round(Math.random() * 1))
 
     return arr
-}
-
-const printGrid = () => {
-    const W = canvas.width - 0.5,
-        H = canvas.height - 0.5,
-        size = Math.floor(W / TILES);
-
-    print.strokeStyle = '#c0dfe9'
-    for (let i = 0.5; i <= W; i += size) {
-
-        print.moveTo(i, 0)
-        print.lineTo(i, H)
-        // print.stroke()
-
-        print.moveTo(0, i)
-        print.lineTo(W, i)
-        print.stroke()
-    }
 }
 
 const neighbours = (i, gen) => {
@@ -94,6 +75,29 @@ const neighbours = (i, gen) => {
 
     // console.log(`${gen[i] ? 'Vivo' : 'Muerto'}, Vecinos: ${neighbours}`);
     return neighbours
+}
+
+const printGrid = () => {
+    const W = canvas.width - 0.5,
+        H = canvas.height - 0.5,
+        size = Math.floor(W / TILES);
+
+    print.strokeStyle = '#c0dfe9'
+    for (let i = 0.5; i <= W + H; i += size) {
+        // vertical
+        if (i <= W) {
+            print.moveTo(i, 0)
+            print.lineTo(i, H)
+        }
+
+        // horizontal
+        if (i <= H) {
+            print.moveTo(0, i)
+            print.lineTo(W, i)
+        }
+
+        print.stroke()
+    }
 }
 
 const printGeneration = (generation) => {

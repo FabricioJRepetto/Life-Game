@@ -1,6 +1,7 @@
 body {
     height: 100vh;
     display: flex;
+    flex-flow: column;
 
     background-color: #101010;
     color: #f0f0f0;
@@ -12,6 +13,14 @@ canvas {
 }
 
 button {
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 1rem;
+    /* color: #f0f0f0; */
+    padding: .5rem;
+
+    cursor:pointer;
+
     width: 100%;
     margin: .5rem 0;
 }
@@ -22,10 +31,10 @@ label {
 
 .control-panel {
     padding: 1rem;
-    position: absolute;
+    /* position: absolute;
     top: 0;
     left: 50%;
-    transform: translate(-50%);
+    transform: translate(-50%); */
 }
 
 .play-container {

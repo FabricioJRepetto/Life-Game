@@ -13,20 +13,20 @@
 
 <body>
     <div class="control-panel">
-        <div>
+        <!-- <div>
             <label>show grid
                 <input type="checkbox" id="grid"></input>
             </label>
             <label>show index
                 <input type="checkbox" id="index"></input>
             </label>
-        </div>
+        </div> -->
 
         <label for="tiles">size</label>
         <input id="tiles" name="tiles" type="number" min="10" max="100" value="400"></input>
 
         <label for="speed">speed (ms)</label>
-        <input id="speed" name="speed" type="number" min="200" max="10000" value="200"></input>
+        <input id="speed" name="speed" type="number" min="200" max="10000" value="400"></input>
 
         <button id="newRandGen">new generation</button>
 
@@ -37,7 +37,7 @@
         <p id="gen-counter">hola</p>
     </div>
 
-    <canvas id="canvas" height="401px" width="401px"></canvas>
+    <canvas id="canvas" height="801px" width="1201px"></canvas>
 </body>
 
 <script src="logic.js"></script>
